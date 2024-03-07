@@ -20,8 +20,8 @@ def main (args : List String) : IO UInt32 := do
 
   let ((ancestor_number, temp_file_path) : Nat × FilePath) ← match args with
     | [] => throw <| IO.userError "Expected at least one argument: a temporary file supplied by the shell"
-    | [temp_file_path, n_input] => pure (← parse_n n_input,                   FilePath.mk temp_file_path)
     | [temp_file_path]          => pure (← promptForAncestorNumber ancestors, FilePath.mk temp_file_path)
+    | [temp_file_path, n_input] => pure (← parse_n n_input,                   FilePath.mk temp_file_path)
     | _ => throw $ IO.userError "Too many arguments"
 
   let n_0_indexed := ancestor_number - 1
@@ -37,6 +37,7 @@ def main (args : List String) : IO UInt32 := do
   -- write it to temp file
   IO.FS.writeFile temp_file_path target_directory.toString
   pure 0
+
   where
     parse_n (n_input : String) : IO Nat := 
       match n_input with
