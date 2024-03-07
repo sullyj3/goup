@@ -1,12 +1,12 @@
 import Lake
 open Lake DSL
 
-package «up-lean» where
+package «goup» where
   -- add package configuration options here
 
-lean_lib «UpLean» where
+lean_lib «Goup» where
   -- add library configuration options here
 
 @[default_target]
-lean_exe «up-lean» where
+lean_exe «goup» where
   root := `Main
